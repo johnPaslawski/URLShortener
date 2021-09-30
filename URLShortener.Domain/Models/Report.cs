@@ -6,7 +6,7 @@ using System;
 
 namespace URLShortener.Domain.Models
 {
-    public class Reports
+    public class Report
     {
         public int Id { get; set; }
         public DateTime CreationTime  { get; set; }

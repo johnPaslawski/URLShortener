@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URLShortener", "URLShortener\URLShortener.csproj", "{CDF146C1-8619-43C4-9EB7-93286F009105}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URLShortener.EFCore", "URLShortener.EFCore\URLShortener.EFCore.csproj", "{88372A14-DA51-488A-A80A-8D08F9EE4F77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URLShortener.Domain", "URLShortener.Domain\URLShortener.Domain.csproj", "{3AAC83AE-3332-4D7D-A631-D00504CAED26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{CDF146C1-8619-43C4-9EB7-93286F009105}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDF146C1-8619-43C4-9EB7-93286F009105}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDF146C1-8619-43C4-9EB7-93286F009105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88372A14-DA51-488A-A80A-8D08F9EE4F77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88372A14-DA51-488A-A80A-8D08F9EE4F77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88372A14-DA51-488A-A80A-8D08F9EE4F77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88372A14-DA51-488A-A80A-8D08F9EE4F77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AAC83AE-3332-4D7D-A631-D00504CAED26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AAC83AE-3332-4D7D-A631-D00504CAED26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AAC83AE-3332-4D7D-A631-D00504CAED26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AAC83AE-3332-4D7D-A631-D00504CAED26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

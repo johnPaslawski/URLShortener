@@ -16,6 +16,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using URLShortener.EFCore.EFData;
+using URLShortener.EFCore.Infrasctructure.Implementations.UOWs;
+using URLShortener.EFCore.Infrasctructure.UOWs;
 
 namespace URLShortener
 {
@@ -31,6 +33,8 @@ namespace URLShortener
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
             services.AddDbContext<URLShortenerDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("MssqlConnection"));

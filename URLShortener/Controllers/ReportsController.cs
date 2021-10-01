@@ -9,12 +9,9 @@ namespace URLShortener.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
-    public class ReportsController : Controller
+    [Route("api/[controller]")]
+    public class ReportsController : ControllerBase
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
     }
 }

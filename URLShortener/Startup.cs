@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using URLShortener.EFCore.EFData;
 using URLShortener.EFCore.Infrasctructure.Implementations.UOWs;
 using URLShortener.EFCore.Infrasctructure.UOWs;
+using URLShortener.Services;
 
 namespace URLShortener
 {
@@ -34,10 +35,20 @@ namespace URLShortener
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<ILinksService, LinksService>();
 
             services.AddDbContext<URLShortenerDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("MssqlConnection"));
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod();
+                    });
             });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -53,6 +64,7 @@ namespace URLShortener
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

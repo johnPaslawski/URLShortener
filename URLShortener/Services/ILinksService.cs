@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace URLShortener.DTO
+namespace URLShortener.Services
 {
-    public class LinkDto
+    public interface ILinksService
     {
-        public string GenuineURL { get; set; }
+        string GenerateRandomLink();
     }
 }

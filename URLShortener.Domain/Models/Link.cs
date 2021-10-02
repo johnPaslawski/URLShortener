@@ -13,5 +13,6 @@ namespace URLShortener.Domain.Models
         public int Id { get; set; }
         public string GenuineURL { get; set; }
         public string ShortenedURL { get; set; }
+        public string Guid { get; set; }
     }
 }

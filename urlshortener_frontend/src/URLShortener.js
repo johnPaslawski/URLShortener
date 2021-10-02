@@ -26,9 +26,9 @@ const URLShortener = () => {
                 return response.json()
             })
             .then((data) => {
-                const id = data.id;
+                const guid = data.guid;
 
-                fetch(`https://localhost:44380/api/Links/${id}`)
+                fetch(`https://localhost:44380/api/Links/${guid}`)
                     .then((response) => {
                         return response.json()
                     })

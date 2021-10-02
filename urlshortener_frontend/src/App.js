@@ -1,11 +1,24 @@
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import URLShortener from './URLShortener';
+import React from 'react';
+import RedirectComponent from './RedirectComponent';
+import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <URLShortener />
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <URLShortener />
+          </Route>
+          <Route path="/:guid">
+            <RedirectComponent />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+
   );
 }
 

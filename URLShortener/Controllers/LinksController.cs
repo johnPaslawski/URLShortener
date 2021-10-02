@@ -18,26 +18,34 @@ namespace URLShortener.Controllers
     {
         private readonly IUnitOfWork _uow;
         private readonly ILinksService _linkServ;
+        private readonly string _baseURL;
 
         public LinksController(IUnitOfWork uow, ILinksService linkServ)
         {
             _uow = uow;
             _linkServ = linkServ;
+            _baseURL = "http://localhost:3000/";
         }
 
-        // GET ___ api/links/{id}
-        [HttpGet("{id}", Name = "GetLink")]
+        /// <summary>
+        /// THIS METHOD RETURNS SPECIFIC LINK FOUND BASED ON GIVEN GIUD
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        /// 
+        // GET : api/links/{guid}
+        [HttpGet("{guid}", Name = "GetLink")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<Link>> GetLink(int id)
+        public async Task<ActionResult<Link>> GetLink(string guid)
         {
             try
             {
-                var link = await _uow.Links.Get(l => l.Id == id);
+                var link = await _uow.Links.Get(l => l.ShortenedURL == $"{_baseURL}{guid}");
                 if (link == null)
                 {
-                    return NotFound($"Link with id = {id} was not found.");
+                    return NotFound($"Link with guid = {guid} was not found.");
                 }
 
                 return Ok(link);
@@ -48,7 +56,12 @@ namespace URLShortener.Controllers
             }
         }
 
-        // GET ___ api/links
+        /// <summary>
+        /// THIS METHOD RETURNS ALL LINKS IN DATABASE. THIS IS ONLY FOR PRESENTATION PURPOSES NOT TO BE USED WITH LARGE DATABASE
+        /// </summary>
+        /// <returns></returns>
+        /// 
+        // GET : api/links
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -65,7 +78,13 @@ namespace URLShortener.Controllers
             }
         }
 
-        // POST ___ api/links
+        /// <summary>
+        /// THIS METHOD POST NEW LINK BASED ON RECIEVED LINK-GENUINE URL FROM CLIENT SIDE
+        /// </summary>
+        /// <param name="linkDto"></param>
+        /// <returns></returns>
+        /// 
+        // POST : api/links
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -76,23 +95,20 @@ namespace URLShortener.Controllers
             {
                 return BadRequest($"Invalid POST attempt in {nameof(CreateLink)}. MODEL STATE IS INVALID.");
             }
-
             try
             {
                 var randomGuid = _linkServ.GenerateRandomLink();
-                var randomLink = $"http://localhost:3000/s/{randomGuid}";
-
+                var randomLink = $"{_baseURL}{randomGuid}";
                 var link = new Link
                 {
                     GenuineURL = linkDto.GenuineURL,
-                    ShortenedURL = randomLink
+                    ShortenedURL = randomLink,
+                    Guid = randomGuid
                 };
-
                 await _uow.Links.Add(link);
                 await _uow.Save();
 
-                //return CreatedAtRoute(new { id = link.Id }, link);
-                return CreatedAtRoute("GetLink", new { id = link.Id }, link);
+                return CreatedAtRoute("GetLink", new { guid = link.Guid }, link);
             }
             catch (Exception err)
             {

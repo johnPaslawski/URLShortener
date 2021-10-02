@@ -24,7 +24,7 @@ namespace URLShortener.Controllers
         {
             _uow = uow;
             _linkServ = linkServ;
-            _baseURL = "http://localhost:3000/s/";
+            _baseURL = "http://localhost:3000/";
         }
 
         /// <summary>

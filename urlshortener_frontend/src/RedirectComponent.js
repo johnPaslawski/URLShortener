@@ -4,11 +4,12 @@ import useApiGet from "./useApiGet";
 
 const RedirectComponent = () => {
 
+    const BASE_URL = "https://localhost:44380/api/Links/";
+
     const { guid } = useParams();
-    const url = `https://localhost:44380/api/Links/${guid}`;
+    const url = `${BASE_URL}${guid}`;
     const { data, isLoading, error } = useApiGet(url);
 
-    console.log("redicomp:"+data);
     return (
         <div>
             { error && <h3>{ error }</h3> }

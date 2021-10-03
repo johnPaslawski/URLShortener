@@ -1,4 +1,7 @@
 # URLShortener
+------------
+Business context document: URL Shortener.pdf 
+------------
 URLShortener - simple MVP example product with EntityFramework ORM &amp; MSSql database, which exhibits proposed fuctionality of URL shortening widget in any core commercial product. Works in terms of exchanging links within a company
 
 URLShoreten consists of 2 main parts - Frontend & Backend. 
